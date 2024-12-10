@@ -9,9 +9,9 @@ int main() {
 
     std::cout << "Greeting: " << greeting << std::endl;
 
-    // FunText toRemove("World");
-    // greeting -= toRemove;     // remove "World"
-    // std::cout << "After removal: " << greeting << std::endl; // "Hello 1234.56"
+    FunText toRemove("World");
+    greeting -= toRemove;     // remove "World"
+    std::cout << "After removal: " << greeting << std::endl; // "Hello 1234.56"
 
     // FunText repeatMe("ha");
     // FunText laughter = repeatMe * 3; // "hahaha"
