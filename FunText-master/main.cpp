@@ -3,9 +3,9 @@
 
 int main() {
     FunText greeting("Hello");
-    // greeting += " World";     // "Hello World"
-    // greeting += 123;          // "Hello World123"
-    // greeting += 4.56f;        // "Hello World1234.56"
+    greeting += " World";     // "Hello World"
+    greeting += 123;          // "Hello World123"
+    greeting += 4.56f;        // "Hello World1234.56"
 
     std::cout << "Greeting: " << greeting << std::endl;
 
