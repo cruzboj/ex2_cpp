@@ -176,6 +176,60 @@ FunText& FunText::operator-=(int n)                         //`**: Remove the la
     return *this;
 }
 
+FunText FunText::operator*(int n) const{
+    char * temp = new char[(length * n)+1];
+    temp[0] = '\0';
+
+    int count = 0 ;
+    while(count != n)
+    {
+        strcat(temp,data);
+        count++;
+    }
+
+    return temp;
+}
+
+FunText FunText::operator()(int start, int length) const{
+    char * temp = new char[(length - start)+1];
+    temp[0] = '\0';
+    for (int i = start; i < length; i++)
+    {
+        temp[i] = data[i];
+    }
+    temp[length] = '\0';
+
+    return temp;
+}
+
+bool FunText::operator==(const FunText &other) const{
+    return strcmp(data, other.data) == 0;
+} 
+bool FunText::operator!=(const FunText &other) const{
+    return strcmp(data, other.data) != 0;
+}
+
+void FunText::reverse(){
+    char *temp = new char[length + 1];
+    int j = 0;  
+    for (int i = length - 1; i >= 0; i--) {
+        temp[j++] = data[i];
+    }
+    temp[length] = '\0';
+
+    delete[] data;
+    data = temp;  
+}
+int FunText::find(const FunText &other) const{
+    char* p = strstr(data, other.data);
+
+    // If substring is found, return the index, else return -1
+    if (p != nullptr) {
+        return p - data;  // Calculate the index relative to 'data'
+    } else {
+        return -1;  // Substring not found
+    }
+}
 std::ostream& operator<<(std::ostream& os, const FunText& funText){
     for (int i = 0; i < funText.getLength() ; i++)
     {
