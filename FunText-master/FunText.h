@@ -3,6 +3,7 @@
 
 #include <cstring> // For strlen and strcpy
 #include <iostream>
+#include <cctype>
 
 class FunText{
         char* data;
@@ -31,10 +32,10 @@ class FunText{
         
         //### `operator+` (Concatenation)
         //Return a new `FunText` without changing the originals:
-        //FunText operator+(const FunText &other) const;   //`**: Concatenate this and `other`.
-        // FunText operator+(const char *other) const;      //`**: Concatenate this and a C-string.
-        // FunText operator+(int number) const;             //`**: Concatenate this and a converted integer.
-        // FunText operator+(float number) const;           //`**: Concatenate this and a converted float.
+        FunText operator+(const FunText &other) const;      //`**: Concatenate this and `other`.
+        FunText operator+(const char *other) const;         //`**: Concatenate this and a C-string.
+        FunText operator+(int number) const;                //`**: Concatenate this and a converted integer.
+        FunText operator+(float number) const;              //`**: Concatenate this and a converted float.
 
         //### `operator-=` (In-Place Removal)
         //Remove content from the current text:
@@ -42,27 +43,32 @@ class FunText{
         FunText &operator-=(const char *other);             //`**: Remove all occurrences of this C-string.
         FunText &operator-=(int n);                         //`**: Remove the last `n` characters (if `n` > length, remove all).
         
+        //### `operator-` (Removal Returning a New Object)
+        //Return a new `FunText` with removals, without changing the original:
+        FunText operator-(const FunText &other) const;      //`**: Return a new `FunText` with all occurrences of `other` removed.
+        FunText operator-(const char *other) const;         //`**: Return a new `FunText` with all occurrences of `other` removed.
+        FunText operator-(int n) const;                     //`**: Return a new `FunText` that is the original minus the last `n` chars.
+
         //### `operator*` (Repetition)
-        FunText operator*(int n) const;                     //`**: Return a new `FunText` that repeats the current text `n` times.
+        FunText operator*(int n) const;                      //`**: Return a new `FunText` that repeats the current text `n` times.
         
         //### `operator()(int start, int length)` (Substring Extraction)
-        FunText operator()(int start, int length) const;     //`**: Extract a substring of given `length` starting at `start`, return as a new `FunText`. Handle out-of-range gracefully.
+        FunText operator()(int start, int length) const;    //`**: Extract a substring of given `length` starting at `start`, return as a new `FunText`. Handle out-of-range gracefully.
 
         //### Comparison Operators
-        bool operator==(const FunText &other) const;         //`**: Return true if both texts are identical.
-        bool operator!=(const FunText &other) const;         //`**: Return true if texts differ.
+        bool operator==(const FunText &other) const;        //`**: Return true if both texts are identical.
+        bool operator!=(const FunText &other) const;        //`**: Return true if texts differ.
 
         //### Indexing Operator
-        //char operator[](int index) const; //`**: Return the character at `index`. Document what happens if `index` is out-of-range (e.g., `assert`, or return `'\0'`).
+        char operator[](int index) const;                   //`**: Return the character at `index`. Document what happens if `index` is out-of-range (e.g., `assert`, or return `'\0'`).
 
 
         //**Utility Methods**
-        // int length() const;                                  //`**: Return the current length.
-        // void clear();                                        //`**: Empty the text (length = 0).
-        // void toUpper();                                      //`**: Convert all letters to uppercase.
-        // void toLower();                                      //`**: Convert all letters to lowercase.
-        void reverse();                                      //`**: Reverse the entire text.
-        int find(const FunText &other) const;                //`**: Find the first occurrence of `other`’s text, return the index or -1 if not found.
+        void clear();                                       //`**: Empty the text (length = 0).
+        void toUpper();                                     //`**: Convert all letters to uppercase.
+        void toLower();                                     //`**: Convert all letters to lowercase.
+        void reverse();                                     //`**: Reverse the entire text.
+        int find(const FunText &other) const;               //`**: Find the first occurrence of `other`’s text, return the index or -1 if not found.
 
         //getters
         char * getData() const {return data;}
